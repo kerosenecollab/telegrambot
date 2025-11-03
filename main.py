@@ -35,17 +35,6 @@ def user_pass(message, name):
     conn = sqlite3.connect('telegram.db')
     cur = conn.cursor()
 
-    cur.execute('''INSERT INTO Users (username, userpass) VALUES (?, ?)''', (name, password))
-    conn.commit()
-    
-    cur.execute('''SELECT * FROM Users''')
-    items = cur.fetchall()
-
-    text = 'Вот все данные из таблицы:\n'
-    
-    for item in items:
-        text += (f"ID: {item[0]}, Имя: {item[1]}, Пароль: {item[2]}\n")
-
     markup = types.InlineKeyboardMarkup()
     bt1 = types.InlineKeyboardButton('Вывести все пользователей', callback_data='database')
     markup.row(bt1)
